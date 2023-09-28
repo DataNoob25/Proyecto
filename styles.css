@@ -1,0 +1,291 @@
+*{
+    padding: 0px;
+    margin: 0px;
+    font-family: Helvetica, sans-serif
+}
+
+body{
+    background: rgb(61, 61, 92); /*Color de fondo*/
+}
+/* Inicio de la cabecera*/
+.cabecera{
+    width: 100%; /*Esa cabezera va a ocupar el 100% de ancho de la pagina*/
+    height: 100px;
+    background-color: green;
+   
+    
+    }
+.titulo{
+    width: 100%; /*Esa cabezera va a ocupar el 100% de ancho de la pagina*/
+    height: 100px;
+
+}
+.snake-boton{
+    text-shadow: 0px 2px 1px #333;
+    transition: all 300ms; /*que cambien todas las propiedades desde los 300ms*/
+}
+
+.snake-boton:hover{ /*cuando pasa el mouse por el boton se aplica la transicion*/
+    text-shadow: 0px 2px 1px #333, 0px 0px 4px #70b233;
+    
+    }
+.snake-1{
+    float: left;
+}
+
+.Snake{
+    width: 100px;
+    height: 95px;
+}
+.snake-2{
+    float: left;
+}
+.snake-boton{
+    margin-top: 20px;
+    width: 300px;
+    height: 60px;
+    float:left;
+    background-color: rgb(2, 56, 2);
+    border-color: yellow;
+
+}
+/*Fin de la cabecera*/
+
+
+/*Inicio de menu*/
+.menu ul{
+    margin-left: 100px;
+    text-align: center;
+    list-style: none; 
+    }
+
+.menu >ul >li{ /* le da una altura a los hijos ul de la clase menu y dentro de los hijos de ul da esas propiedades a los hijos li*/
+line-height: 40px;
+float: left;
+
+        
+        }
+       
+.menu >ul >li a{
+    display: block;
+    padding-left: 20px;
+    padding-right: 20px;
+    margin-top:  60px;
+    margin-right: 20px;
+    color:white;
+    text-decoration: none;
+                
+}
+        
+.menu > ul > li > a:hover{ /*establece un hoover cuando se pasa con el mouse encima de la barra de navegacion es decir una transicion*/
+        background-color: #70b233;
+        box-shadow: 0px 0px 4px green inset; /*Sombra interior*/
+    }
+    .parrafo{
+
+        font-size: 15px;
+        line-height: 15px;
+    }
+
+/*Fin de menu*/
+
+
+/*Menu despegable inicio*/
+.menu>ul>li>ul{ /*los hijos ul de la clase menu despues los hijos l1 de los ul y luego los hijos ul de los li hijos*/
+    display:none; /*los elementos ul no seran visibles en la pagina*/
+    position: absolute;
+    width: 160px;
+    box-shadow: 0px 2px 2px gray;
+   
+}
+
+.menu >ul >li:hover>ul{ /*cuando el usuario pasa el mouse sobre un elemento del menú principal, se mostrará el submenú asociado.
+    Cuando cambia la propiedad display de "none" a "block" y se cumple la condición de hover, lo que hace es que el submenú se muestre.*/
+    display:block;
+}
+
+.menu >ul >li:hover>ul>li{
+    background-color: green;
+    border-bottom: 1px solid #d6d6d6;
+    border: 5px solid rgb(3, 48, 3);
+    padding:  8px;
+    line-height: 25px;
+    font-size: 13px;
+}
+
+/*Menu despegable fin*/
+
+/* Formulario inicio*/
+.formulario {
+    position: absolute;
+    top: 250px;
+    left: 90px;
+    width: 20%;
+    height: 33%;
+    background-color: green;
+    border: 5px solid black;
+    
+}
+.form{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+label[for="nombre"],label[for="email"]{
+    font-weight: bold;
+}
+button[type="submit"]{
+    background-color: rgb(15, 90, 15);
+    border: 2px  solid black;
+    margin-left: 40px;
+    margin-top: 15px;
+    font-size: 20px;
+    font-weight: bold;
+    
+}
+/*Formulario fin*/
+
+/* Estilos para la tabla */
+table {
+    border: 5px  solid black;
+    float: right;
+    width: 20%;
+    border-collapse: collapse;
+    margin: 20px auto;
+}
+table{
+    position: absolute;
+    right: 96px;
+    bottom: 175px;
+}
+
+/* Estilos para las celdas */
+th, td {
+    border: 5px solid #000; 
+    padding: 8px;
+    text-align: center;
+   
+}
+td{
+    color:white;
+}
+/* Estilos para las cabeceras */
+th {
+    background-color: green;
+}
+
+tr{
+    background-color: green;
+}
+
+
+/*Inicio de juego*/
+.container{
+    width: 30%; 
+    height: 100%;
+    background-color: gray;
+    padding-bottom: 10px; 
+    margin-left: 452px;
+    margin-top: 20px;
+    border: 5px solid black;
+        
+    }
+
+.imagen{
+    width: 100px; /* Ancho deseado */
+    margin-left: 15.5px;
+    margin-bottom: 20px;
+    
+    
+}
+.pantalla{
+        width: 350px;
+        height: 350px;
+        margin-top: 20px;
+        border: 5px solid black;
+    }
+
+    .botones{
+      width: 100%;
+      height: 100%;
+      position: relative;
+    }
+
+.tamaño-1{
+    width: 140px;
+    height: 50px;
+    margin-left: 122px;
+    background-color: rgb(12, 114, 12);
+    border: 1px solid rgb(3, 39, 3);
+    transition: all 300ms;
+}
+
+    
+
+
+.tamaño-1:hover{
+    background-color: #70b233;
+    box-shadow: 0px 0px 4px green inset; /*Sombra interior*/
+
+}
+.tamaño-2{
+    width: 140px;
+    height: 50px;
+    margin-left: 122px;
+    background-color: rgb(12, 114, 12);
+    border: 1px solid rgb(3, 39, 3);
+    transition: all 300ms;
+
+}
+.tamaño-2:hover{
+    background-color: #70b233;
+    box-shadow: 0px 0px 4px green inset; /*Sombra interior*/
+
+}
+.tamaño-3{
+    width: 128px;
+    height: 50px;
+    margin-left: 260px;
+    position:absolute;
+    top: 25px;
+    left: 2px;
+    background-color: rgb(12, 114, 12);
+    border: 1px solid rgb(3, 39, 3);
+    transition: all 300ms;
+    
+
+}
+
+.tamaño-3:hover{
+    background-color: #70b233;
+    box-shadow: 0px 0px 4px green inset; /*Sombra interior*/
+
+}
+.tamaño-4{
+    width: 121px;
+    height: 50px;
+    position:absolute;
+    top: 25px;
+    left: 1px;
+    background-color: rgb(12, 114, 12);
+    border: 1px solid rgb(3, 39, 3);
+    transition: all 300ms;
+
+}
+.tamaño-4:hover{
+    background-color: #70b233;
+    box-shadow: 0px 0px 4px green inset; /*Sombra interior*/
+
+}
+.parrafo-2{
+    font-size: 40px;
+}
+footer{
+    font-weight: bold;
+}
+
+/*Fin de juego*/
+
+
