@@ -5,27 +5,27 @@
 }
 
 body{
-    background: rgb(61, 61, 92); /*Color de fondo*/
+    background: rgb(61, 61, 92); 
 }
 /* Inicio de la cabecera*/
 .cabecera{
-    width: 100%; /*Esa cabezera va a ocupar el 100% de ancho de la pagina*/
+    width: 100%; 
     height: 100px;
     background-color: green;
    
     
     }
 .titulo{
-    width: 100%; /*Esa cabezera va a ocupar el 100% de ancho de la pagina*/
+    width: 100%; 
     height: 100px;
 
 }
 .snake-boton{
     text-shadow: 0px 2px 1px #333;
-    transition: all 300ms; /*que cambien todas las propiedades desde los 300ms*/
+    transition: all 300ms; 
 }
 
-.snake-boton:hover{ /*cuando pasa el mouse por el boton se aplica la transicion*/
+.snake-boton:hover{ 
     text-shadow: 0px 2px 1px #333, 0px 0px 4px #70b233;
     
     }
@@ -59,7 +59,7 @@ body{
     list-style: none; 
     }
 
-.menu >ul >li{ /* le da una altura a los hijos ul de la clase menu y dentro de los hijos de ul da esas propiedades a los hijos li*/
+.menu >ul >li{ 
 line-height: 40px;
 float: left;
 
@@ -77,7 +77,7 @@ float: left;
                 
 }
         
-.menu > ul > li > a:hover{ /*establece un hoover cuando se pasa con el mouse encima de la barra de navegacion es decir una transicion*/
+.menu > ul > li > a:hover{
         background-color: #70b233;
         box-shadow: 0px 0px 4px green inset; /*Sombra interior*/
     }
@@ -91,16 +91,15 @@ float: left;
 
 
 /*Menu despegable inicio*/
-.menu>ul>li>ul{ /*los hijos ul de la clase menu despues los hijos l1 de los ul y luego los hijos ul de los li hijos*/
-    display:none; /*los elementos ul no seran visibles en la pagina*/
+.menu>ul>li>ul{ 
+    display:none; 
     position: absolute;
     width: 160px;
     box-shadow: 0px 2px 2px gray;
    
 }
 
-.menu >ul >li:hover>ul{ /*cuando el usuario pasa el mouse sobre un elemento del menú principal, se mostrará el submenú asociado.
-    Cuando cambia la propiedad display de "none" a "block" y se cumple la condición de hover, lo que hace es que el submenú se muestre.*/
+.menu >ul >li:hover>ul{ 
     display:block;
 }
 
@@ -194,7 +193,7 @@ tr{
     }
 
 .imagen{
-    width: 100px; /* Ancho deseado */
+    width: 100px; 
     margin-left: 15.5px;
     margin-bottom: 20px;
     
@@ -285,7 +284,6 @@ tr{
 footer{
     font-weight: bold;
 }
-
 /*Fin de juego*/
 
 
