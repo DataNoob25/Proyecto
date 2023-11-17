@@ -1,153 +1,165 @@
-// HTML Elements
-const board = document.getElementById('board');
-const startButton = document.getElementById('start');
+const contenedor = document.querySelector('.contenedor')  
+let cabezaX; 
+let cabezaY; 
+let cuerpoSnake=[]
+let largoSnake = 2
+let comidaX;
+let comidaY;
+let puntaje = 0
+let velocidad;
 
-// Game settings
-const boardSize = 10;
-const gameSpeed = 100;
-const squareTypes = {
-    emptySquare: 0,
-    snakeSquare: 1,
-    foodSquare: 2
-};
-const directions = {
-    ArrowUp: -10,
-    ArrowDown: 10,
-    ArrowRight: 1,
-    ArrowLeft: -1,
-};
+let moverSnakeUp;
+let moverSnakeDown;
+let moverSnakeLeft;
+let moverSnakeRight; 
 
-// Game variables
-let snake;
-let score;
-let direction;
-let boardSquares;
-let emptySquares;
-let moveInterval;
+let ancho = 15
+let alto = 15
 
-const drawSnake = () => {
-    snake.forEach( square => drawSquare(square, 'snakeSquare'));
+
+const iniciar = ()=>{
+    contenedor.textContent=''
+    contenedor.style.gridTemplateRows =' repeat('+ancho+',auto)';
+    contenedor.style.gridTemplateColumns =' repeat('+alto+',auto)';
+    cabezaX = 4
+    cabezaY = 4
+    cuerpoSnake=[]
+    largoSnake = 2
+    velocidad = 200
+    puntaje = 0
+
+
+    for (let i = 0; i < ancho; i++) {
+        for (let j = 0; j < alto; j++) {
+            let casilla = document.createElement('div')
+            casilla.setAttribute('class','casilla-pos-'+i+'-'+j)
+            contenedor.appendChild(casilla)
+        }
+}
+posicionarSnake(cabezaX,cabezaY)
+posicionarComida()
 }
 
-// Rellena cada cuadrado del tablero
-// @params 
-// square: posicion del cuadrado,
-// type: tipo de cuadrado (emptySquare, snakeSquare, foodSquare)
-const drawSquare = (square, type) => {
-    const [ row, column ] = square.split('');
-    boardSquares[row][column] = squareTypes[type];
-    const squareElement = document.getElementById(square);
-    squareElement.setAttribute('class', `square ${type}`);
 
-    if(type === 'emptySquare') {
-        emptySquares.push(square);
-    } else {
-        if(emptySquares.indexOf(square) !== -1) {
-            emptySquares.splice(emptySquares.indexOf(square), 1);
+const posicionarSnake =(x,y) =>{
+    let autoColision = false
+    cuerpoSnake.forEach(posicion => {
+        if(posicion[0] == x && posicion[1] == y){
+            autoColision = true
+        }
+    });
+
+    if((x == ancho) || (y == alto) || (x == -1) || (y == -1) || autoColision){
+        limpiarIntervalos()
+        gameOver()
+    }else{
+        cuerpoSnake.push([x,y])
+        let casilla = document.querySelector('.casilla-pos-'+x+'-'+y)
+        casilla.style.backgroundColor = 'green'
+
+
+        if(comidaX == x && comidaY ==y){
+            posicionarComida()
+            largoSnake++
+            if(velocidad !=100){
+                velocidad -= 10
+            }
+            
+            sumarPuntaje()
+        }
+
+
+        if(cuerpoSnake.length - largoSnake > 1) {
+            let borrar =  cuerpoSnake.shift()
+            let casillaAnterior = document.querySelector('.casilla-pos-'+borrar[0]+'-'+borrar[1])
+            casillaAnterior.style.backgroundColor='black'
         }
     }
 }
 
-const moveSnake = () => {
-    const newSquare = String(
-        Number(snake[snake.length - 1]) + directions[direction])
-        .padStart(2, '0');
-    const [row, column] = newSquare.split('');
 
+document.addEventListener('keydown', (event) => {
+    let keyValue = event.key;
+    //let codeValue = event.code;
 
-    if( newSquare < 0 || 
-        newSquare > boardSize * boardSize  ||
-        (direction === 'ArrowRight' && column == 0) ||
-        (direction === 'ArrowLeft' && column == 9 ||
-        boardSquares[row][column] === squareTypes.snakeSquare) ) {
-        gameOver();
-    } else {
-        snake.push(newSquare);
-        if(boardSquares[row][column] === squareTypes.foodSquare) {
-            addFood();
-        } else {
-            const emptySquare = snake.shift();
-            drawSquare(emptySquare, 'emptySquare');
-        }
-        drawSnake();
+    if (keyValue =='ArrowUp') {
+        limpiarIntervalos()
+        
+        moverSnakeUp =  setInterval(()=>{
+            cabezaX--
+            posicionarSnake(cabezaX,cabezaY)
+            },velocidad)
     }
-}
 
-const addFood = () => {
-    score++;
-    updateScore();
-    createRandomFood();
-}
+    if (keyValue =='ArrowDown') {
+        limpiarIntervalos()
 
-const gameOver = () => {
-    gameOverSign.style.display = 'block';
-    clearInterval(moveInterval)
-    startButton.disabled = false;
-}
-
-const setDirection = newDirection => {
-    direction = newDirection;
-}
-
-const directionEvent = key => {
-    switch (key.code) {
-        case 'ArrowUp':
-            direction != 'ArrowDown' && setDirection(key.code)
-            break;
-        case 'ArrowDown':
-            direction != 'ArrowUp' && setDirection(key.code)
-            break;
-        case 'ArrowLeft':
-            direction != 'ArrowRight' && setDirection(key.code)
-            break;
-        case 'ArrowRight':
-            direction != 'ArrowLeft' && setDirection(key.code)
-            break;
+        moverSnakeDown = setInterval(()=>{
+            cabezaX++
+            posicionarSnake(cabezaX,cabezaY)
+            },velocidad)
     }
+
+    if (keyValue =='ArrowLeft') {
+        limpiarIntervalos()
+        
+        moverSnakeLeft = setInterval(()=>{
+            cabezaY--
+            posicionarSnake(cabezaX,cabezaY)
+            },velocidad)
+
+    }
+
+    if (keyValue =='ArrowRight') {
+        limpiarIntervalos()
+        
+        moverSnakeRight = setInterval(()=>{
+            cabezaY++
+            posicionarSnake(cabezaX,cabezaY)
+            },velocidad)
+    }
+}, false);
+
+
+const posicionarComida = () =>{
+    run = true
+    while(run){
+        comidaX = Math.floor(Math.random()*ancho)
+        comidaY = Math.floor(Math.random()*alto)
+        
+        cuerpoSnake.forEach(posicion => {
+            if(posicion[0] != comidaX && posicion[1] != comidaY){
+                run = false
+            }
+        });
+    }
+    let casilla = document.querySelector('.casilla-pos-'+comidaX+'-'+comidaY)
+    casilla.style.backgroundColor = 'red'
 }
 
-const createRandomFood = () => {
-    const randomEmptySquare = emptySquares[Math.floor(Math.random() * emptySquares.length)];
-    drawSquare(randomEmptySquare, 'foodSquare');
+
+const limpiarIntervalos=()=>{
+    clearInterval(moverSnakeDown)
+    clearInterval(moverSnakeUp)
+    clearInterval(moverSnakeLeft)
+    clearInterval(moverSnakeRight)
 }
 
-const updateScore = () => {
-    scoreBoard.innerText = score;
+const gameOver = ()=>{
+    contenedor.textContent ='Game over'
+    contenedor.style.color = 'green'
+    contenedor.style.fontSize = '50px'
+
+    setTimeout(()=>{iniciar()},2000)
 }
 
-const createBoard = () => {
-    boardSquares.forEach( (row, rowIndex) => {
-        row.forEach( (column, columnndex) => {
-            const squareValue = `${rowIndex}${columnndex}`;
-            const squareElement = document.createElement('div');
-            squareElement.setAttribute('class', 'square emptySquare');
-            squareElement.setAttribute('id', squareValue);
-            board.appendChild(squareElement);
-            emptySquares.push(squareValue);
-        })
-    })
+
+const sumarPuntaje=()=>{
+    puntaje++
+    let punt = document.querySelector('.puntaje')
+    punt.textContent = 'Puntaje  '+puntaje
 }
 
-const setGame = () => {
-    snake = ['00', '01', '02', '03'];
-    score = snake.length;
-    direction = 'ArrowRight';
-    boardSquares = Array.from(Array(boardSize), () => new Array(boardSize).fill(squareTypes.emptySquare));
-    console.log(boardSquares);
-    board.innerHTML = '';
-    emptySquares = [];
-    createBoard();
-}
 
-const startGame = () => {
-    setGame();
-    gameOverSign.style.display = 'none';
-    startButton.disabled = true;
-    drawSnake();
-    updateScore();
-    createRandomFood();
-    document.addEventListener('keydown', directionEvent);
-    moveInterval = setInterval( () => moveSnake(), gameSpeed);
-}
 
-startButton.addEventListener('click', startGame);
+    

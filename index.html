@@ -9,9 +9,10 @@
       href="Imagenes/icons8-snake-48.png"
     />
     <link rel="stylesheet" type="text/css" href="styles.css" />
+    <script src="Juego.js" defer></script>
     <title>Snake Game</title>
   </head>
-  <body>
+  <body onload="iniciar()">
     <!--Inicio de Cabecera-->
     <header class="cabecera">
       <div class="titulo">
@@ -86,8 +87,8 @@
 
     <!--Inicio de juego-->
     <div class="container">
-      <div class="board"></div>
-
+      <div class="contenedor"></div>
+      <div class="puntaje">Puntaje 0</div>
       <div class="botones">
         <div class="boton">
           <button class="tamaño-1"><p class="parrafo-2">↑</p></button>
@@ -106,6 +107,5 @@
     <!--Fin de juego-->
 
     <footer>&copy Desarrollado por Alex Juarez Contreras 2023</footer>
-    <script type="text/javascript" src="Juego.js"></script>
   </body>
 </html>
